@@ -97,7 +97,9 @@ module OpenApi
         self[:requestBody] = RefObj.new(:requestBody, component_key)
       end
 
-      def response(code, desc, media_type = nil, headers: { }, data: { }, **)
+      def response(code, desc, media_type = nil, options)
+        headers = options[:headers] || {}
+        data = options[:data] || {}
         self[:responses][code.to_s] ||= ResponseObj.new(desc)
         self[:responses][code.to_s].absorb(desc, media_type, headers:, data:, **)
       end
