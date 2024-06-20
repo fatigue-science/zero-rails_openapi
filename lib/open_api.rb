@@ -42,7 +42,7 @@ module OpenApi
     end
 
     doc[:components].delete_if { |_, v| v.blank? }
-    doc[:tags]  = doc[:tags].sort { |a, b| a[:name] <=> b[:name] }
+    doc[:tags]  = doc[:tags].uniq.sort { |a, b| a[:name] <=> b[:name] }
     doc[:paths] = doc[:paths].sort.to_h
     OpenApi.docs[doc_name] = doc#.delete_if { |_, v| v.blank? }
   end
